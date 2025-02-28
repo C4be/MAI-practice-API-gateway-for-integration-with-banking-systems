@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+    postgres:
+        image: postgres:16
+        container_name: bankDB
+        restart: always
+        environment:
+            POSTGRES_USER: fast_api
+            POSTGRES_PASSWORD: root
+            POSTGRES_DB: bankDB
+        ports:
+            - "5445:5432"
+        volumes:
+            - ./resources/data_to_save:/var/lib/postgresql/data
+        healthcheck:
+            test: [ "CMD-SHELL", "pg_isready -U fast_api -d bankDB" ]
+            interval: 30s
+            retries: 5
+            start_period: 10s
+        networks:
+            - app_network
+
+    api:
+        build: ./backend
+        container_name: bankAPI
+        restart: always
+        depends_on:
+            postgres:
+                condition: service_healthy
+        environment:
+            POSTGRES_HOST: postgres
+            POSTGRES_USER: fast_api
+            POSTGRES_PASSWORD: root
+            POSTGRES_DB: bankDB
+            POSTGRES_PORT: 5432
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./backend:/app # Для разработки, чтобы изменения сразу применялись
+        working_dir: /app
+        command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+        networks:
+            - app_network
+
+networks:
+    app_network:
+        driver: bridge
