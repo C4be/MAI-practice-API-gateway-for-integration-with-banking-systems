@@ -6,5 +6,5 @@ class Category(Base):
     
     id = Column(Integer, primary_key=True)
     
-    # Тип документа - [кредитный договор, выписка из счета, ...]
+    # Тип документа - [кредитный договор, выписка из счета, счет ...]
     type = Column(String)

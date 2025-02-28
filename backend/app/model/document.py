@@ -36,4 +36,4 @@ class Document(Base):
     
     user = relationship("User")
     worker_id = relationship("User")
-    callcopy = relationship("Category")
+    category_id = relationship("Category")
