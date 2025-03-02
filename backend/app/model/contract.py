@@ -8,7 +8,7 @@ class Contract(Base):
     id = Column(Integer, primary_key=True)
     
     # ID клиента
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('users.id'))
     
     # ID документа
     document_id = Column(Integer, ForeignKey('document.id'))

@@ -3,6 +3,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, Session
 from app.controller import abc_controller, cm_controller, dbo_controller
 from app.core.config import DATABASE_URL
+from app.core.logger import setup_logger
 
 # Движок соединения с Postgres
 engine = create_engine(DATABASE_URL)
@@ -25,6 +26,9 @@ async def lifespan(app: FastAPI):
             for statement in clear_script.split(';'):
                 if statement.strip():
                     connection.execute(text(statement))
+
+# Настройка логгера
+logger = setup_logger()
 
 # Создаем приложение
 app = FastAPI(lifespan=lifespan)

@@ -8,7 +8,7 @@ class Stat(Base):
     id = Column(Integer, primary_key=True)
     
     # ID пользователя
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('users.id'))
     
     # Дата загрузки
     date = Column(Date)

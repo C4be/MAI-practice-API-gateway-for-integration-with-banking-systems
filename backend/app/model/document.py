@@ -14,10 +14,10 @@ class Document(Base):
     description = Column(String)
     
     # ID пользователя
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('users.id'))
     
     # ID работника оформившего документ
-    worker_id = Column(Integer, ForeignKey('user.id'))
+    worker_id = Column(Integer, ForeignKey('users.id'))
     
     # ID Категория документа
     category_id = Column(Integer, ForeignKey('category.id'))
