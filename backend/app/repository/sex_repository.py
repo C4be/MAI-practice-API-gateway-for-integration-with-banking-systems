@@ -1,5 +1,5 @@
-from base_repository import BaseRepository
-from model.sex import Sex
+from app.repository.base_repository import BaseRepository
+from app.model.sex import Sex
 
 # TODO: дописать необходимые методы
 class SexRepository(BaseRepository):

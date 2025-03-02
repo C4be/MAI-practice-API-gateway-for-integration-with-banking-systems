@@ -1,5 +1,5 @@
-from base_repository import BaseRepository
-from model.user_type import UserType
+from app.repository.base_repository import BaseRepository
+from app.model.user_type import UserType
 
 # TODO: дописать необходимые методы
 class UserTypeRepository(BaseRepository):

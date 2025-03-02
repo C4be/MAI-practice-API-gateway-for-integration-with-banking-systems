@@ -1,5 +1,5 @@
-from base_repository import BaseRepository
-from model.stat import Stat
+from app.repository.base_repository import BaseRepository
+from app.model.stat import Stat
 
 # TODO: дописать необходимые методы
 class StatRepository(BaseRepository):

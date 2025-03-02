@@ -1,5 +1,5 @@
-from base_repository import BaseRepository
-from model.fin_pos import FinPos
+from app.repository.base_repository import BaseRepository
+from app.model.fin_pos import FinPos
 
 # TODO: дописать необходимые методы
 class FinPosRepository(BaseRepository):

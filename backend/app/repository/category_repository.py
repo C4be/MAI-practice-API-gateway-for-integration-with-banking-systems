@@ -1,5 +1,5 @@
-from base_repository import BaseRepository
-from model.category import Category
+from app.repository.base_repository import BaseRepository
+from app.model.category import Category
 
 # TODO: дописать необходимые методы
 class CategoryRepository(BaseRepository):

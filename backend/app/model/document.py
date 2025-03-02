@@ -34,6 +34,6 @@ class Document(Base):
     # Фактическая дата закрытия/недействительности
     fact_maturity_date = Column(Date)
     
-    user = relationship("User")
-    worker_id = relationship("User")
-    category_id = relationship("Category")
+    user = relationship("User", foreign_keys=[user_id])
+    worker = relationship("User", foreign_keys=[worker_id])
+    category = relationship("Category")

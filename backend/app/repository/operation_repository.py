@@ -1,5 +1,5 @@
-from base_repository import BaseRepository
-from model.operation import Operation
+from app.repository.base_repository import BaseRepository
+from app.model.operation import Operation
 
 # TODO: дописать необходимые методы
 class OperationRepository(BaseRepository):

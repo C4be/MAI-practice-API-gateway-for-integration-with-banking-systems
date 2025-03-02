@@ -36,4 +36,4 @@ class User(Base):
     
     fin_position = relationship("FinPos")
     user_type = relationship("UserType")
-    sex_id = relationship("Sex")
+    sex = relationship("Sex")

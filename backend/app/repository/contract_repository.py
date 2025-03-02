@@ -1,5 +1,5 @@
-from base_repository import BaseRepository
-from model.contract import Contract
+from app.repository.base_repository import BaseRepository
+from app.model.contract import Contract
 
 # TODO: дописать необходимые методы
 class ContractRepository(BaseRepository):
