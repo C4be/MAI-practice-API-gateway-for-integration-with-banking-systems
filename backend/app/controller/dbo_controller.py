@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from app.core.dependencies import get_db
 from pydantic import BaseModel
@@ -6,6 +7,7 @@ from typing import List
 from app.dto.fio_request import FIORequest
 from app.service.document_service import DocumentService
 from app.core.logger import setup_logger
+import shutil
 
 # Настроенный логгер
 logger = setup_logger()
@@ -37,11 +39,13 @@ def get_all_user_documents(fio_request: FIORequest, db: Session = Depends(get_db
         raise HTTPException(status_code=404, detail="Documents not found")
     return docs
     
-
-@router.get('/dbo/user/{user_id}/documents')
-def get_all_users_documents():
-    pass
-
-@router.delete('/dbo/documents/{doc_id}')
-def delete_document_by_id():
-    pass
+@router.post('/dbo/load_document')
+def load_document(file: UploadFile = File(...)):
+    file_location = f'app/resources/files/{file.filename}'
+    
+    # Сохраняем файл
+    with open(file_location, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    
+    # Возвращаем ответ с подтверждением
+    return JSONResponse(content={"message": f"File '{file.filename}' saved at '{file_location}'"})
