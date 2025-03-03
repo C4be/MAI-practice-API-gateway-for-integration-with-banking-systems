@@ -4,3 +4,7 @@ sqlalchemy
 psycopg2
 requests
 weasyprint
+pymongo
+motor
+python-multipart
+aiofiles

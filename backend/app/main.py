@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, Session
 from app.controller import abc_controller, cm_controller, dbo_controller
-from app.core.config import DATABASE_URL
+from app.core.config import *
 from app.core.logger import setup_logger
 import requests
 import json
@@ -13,6 +13,8 @@ from weasyprint import HTML
 
 # Движок соединения с Postgres
 engine = create_engine(DATABASE_URL)
+
+
 
 
 @asynccontextmanager
