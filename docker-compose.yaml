@@ -12,7 +12,7 @@ services:
         ports:
             - "5445:5432"
         volumes:
-            - ./resources/postgres:/var/lib/postgresql/data
+            - ./resources/.postgres:/var/lib/postgresql/data
         healthcheck:
             test: [ "CMD-SHELL", "pg_isready -U fast_api -d bankDB" ]
             interval: 30s
@@ -32,7 +32,7 @@ services:
         ports:
             - "27018:27017"
         volumes:
-            - ./resources/mongo:/data/db
+            - ./resources/.mongo:/data/db
         networks:
             - app_network
 
