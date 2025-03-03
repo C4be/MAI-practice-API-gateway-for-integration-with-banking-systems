@@ -27,9 +27,7 @@ clean: clean_db
 
 # Очистка базы данных
 clean_db:
-	rm -rf ./resources/.postgres/*
-	rm -rf ./resources/.mongo/*
-	rm -rf ./resources/.mongo/.mongodb
+	rm -rf ./resources/*
 
 # Проверка состояния контейнеров
 status:
