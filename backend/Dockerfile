@@ -1,24 +1,29 @@
 # Используем официальный Python-образ
-FROM python:3.11-slim
+FROM python:3.11-slim-bookworm
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
 # Устанавливаем системные зависимости, необходимые для работы WeasyPrint
 RUN apt-get update && apt-get install -y \
-    build-essential \    
+    build-essential \
     python3-dev \
     libpq-dev \
-    gcc
+    gcc \
+    libgirepository1.0-dev \
+    gir1.2-pango-1.0 \
+    libcairo2 \
+    libpango1.0-0 \
+    libpangocairo-1.0-0 \
+    libffi-dev \
+    shared-mime-info \
+    && rm -rf /var/lib/apt/lists/*
     
 # Копируем файл зависимостей (например, requirements.txt)
-COPY requirements.txt .
+COPY . .
 
 # Устанавливаем Python-зависимости
-RUN pip install  -r requirements.txt
-
-# Копируем код приложения в контейнер
-COPY . .
+RUN pip install -r requirements.txt
 
 # Открываем порт 8000 для приложения
 EXPOSE 8000

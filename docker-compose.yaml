@@ -11,7 +11,7 @@ services:
         ports:
             - "5445:5432"
         volumes:
-            - ./resources/.postgres:/var/lib/postgresql/data
+            - ./.temp_data/.postgres:/var/lib/postgresql/data
         healthcheck:
             test: [ "CMD-SHELL", "pg_isready -U fast_api -d bankDB" ]
             interval: 30s
@@ -31,7 +31,7 @@ services:
         ports:
             - "27018:27017"
         volumes:
-            - ./resources/.mongo:/data/db
+            - ./.temp_data/.mongo:/data/db
         networks:
             - app_network
 
@@ -56,8 +56,8 @@ services:
         ports:
             - "8000:8000"
         volumes:
-            - ./backend:/app # Для разработки, чтобы изменения сразу применялись
-            - ./pip_cache:/root/.cache/pip  # Volume для кэша pip
+            # - ./.temp_data/.backend:/app # Для разработки, чтобы изменения сразу применялись
+            - ./.temp_data/.pip_cache:/root/.cache/pip  # Volume для кэша pip
         working_dir: /app
         command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
         networks:
