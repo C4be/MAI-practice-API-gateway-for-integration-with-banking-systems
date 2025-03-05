@@ -10,35 +10,37 @@ import os
 from contextlib import asynccontextmanager
 import asyncio
 from weasyprint import HTML
-
-# Движок соединения с Postgres
-engine = create_engine(DATABASE_URL)
+from app.core.dependencies import get_db, create_tables, drop_tables, load_guide_tables
 
 
-
+postgres = get_db()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Выполняется при запуске и завершении работы приложения"""
 
+    create_tables()
+    load_guide_tables()
+    
     # Заполняем БД при запуске
-    with engine.begin() as connection:
-        with open("app/resources/postgres/data.sql", "r", encoding="utf-8") as file:
-            sql_script = file.read()
-            for statement in sql_script.split(';'):
-                if statement.strip():
-                    connection.execute(text(statement))
+    # with engine.begin() as connection:
+    #     with open("app/resources/postgres/data.sql", "r", encoding="utf-8") as file:
+    #         sql_script = file.read()
+    #         for statement in sql_script.split(';'):
+    #             if statement.strip():
+    #                 connection.execute(text(statement))
     
 
     yield  # Дальше работает приложение
 
+    drop_tables()
     # Очищаем БД при завершении работы
-    with engine.begin() as connection:
-        with open("app/resources/postgres/clear.sql", "r", encoding="utf-8") as file:
-            clear_script = file.read()
-            for statement in clear_script.split(';'):
-                if statement.strip():
-                    connection.execute(text(statement))
+    # with engine.begin() as connection:
+    #     with open("app/resources/postgres/clear.sql", "r", encoding="utf-8") as file:
+    #         clear_script = file.read()
+    #         for statement in clear_script.split(';'):
+    #             if statement.strip():
+    #                 connection.execute(text(statement))
 
 
 def save_docs():

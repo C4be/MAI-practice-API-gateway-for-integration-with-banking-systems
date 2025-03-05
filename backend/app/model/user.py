@@ -34,6 +34,10 @@ class User(Base):
     # ID пользователя
     user_type_id = Column(Integer, ForeignKey('user_type.id'))
     
+    # ID доступа к системе
+    system_id = Column(Integer, ForeignKey('systems.id'))
+    
     fin_position = relationship("FinPos")
     user_type = relationship("UserType")
     sex = relationship("Sex")
+    system = relationship("Systems")

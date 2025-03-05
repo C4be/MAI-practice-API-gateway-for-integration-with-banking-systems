@@ -1,29 +1,19 @@
-# test на локалхосте
-# DATABASE_URL = 'postgresql://fast_api:root@localhost:5445/bankDB'
-# MONGO_DB_NAME = 'files'
-# DATABASE_MONGO_URL = 'mongodb://fast_api:root@localhost:27018/fileStorageDB?authSource=admin'
-
-# DATABASE_URL = "postgresql://fast_api:root@postgres:5432/bankDB"
-# MONGO_DB_NAME = "files"
-# DATABASE_MONGO_URL = "mongodb://fast_api:root@mongo:27017/fileStorageDB?authSource=admin"
-
 import os
 
-env = os.getenv('CONTEXT_ENVIRONMENT', 'local')
-
+# === Константы для подключения к Базам Данных ===
 MONGO_DB_NAME = "files"
 DATABASE_URL = None
 DATABASE_MONGO_URL = None
 
+# === Инициализация переменных зависимых от среды ===
+env = os.getenv('CONTEXT_ENVIRONMENT', 'local')
 if env == 'docker':
-    # context from docker compose by postgres
+    # === Подключение внутри контейнера ===
     pg_user = os.getenv('POSTGRES_USER')
     pg_passwd =  os.getenv('POSTGRES_PASSWORD')
     pg_host = os.getenv('POSTGRES_HOST')
     pg_port = os.getenv('POSTGRES_PORT')
     pg_db = os.getenv('POSTGRES_DB')
-    
-    # context from docker compose by mongo
     mongo_user = os.getenv('MONGO_USER')
     mongo_passwd =  os.getenv('MONGO_PASSWORD')
     mongo_host = os.getenv('MONGO_HOST')
@@ -34,6 +24,6 @@ if env == 'docker':
     DATABASE_MONGO_URL = f'mongodb://{mongo_user}:{mongo_passwd}@{mongo_host}:{mongo_port}/{mongo_db}?authSource=admin'
     
 elif env == 'local':
-    # разработка с ручным запуском приложения
+    # === Подключение к контейнерам ===
     DATABASE_URL = 'postgresql://fast_api:root@localhost:5445/bankDB'
     DATABASE_MONGO_URL = 'mongodb://fast_api:root@localhost:27018/fileStorageDB?authSource=admin'
