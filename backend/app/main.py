@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, Session
 from app.controller import abc_controller, cm_controller, dbo_controller
-from app.core.config import *
+from app.core.config import DATABASE_URL, DATABASE_MONGO_URL, MONGO_DB_NAME
 from app.core.logger import setup_logger
 import requests
 import json
@@ -74,5 +74,5 @@ app.include_router(cm_controller.router)
 
 @app.get("/")
 def read_root():
-    save_docs()
-    return {"message": "API работает"}
+    # save_docs()  # TODO: не забыть вклчить
+    return {"message": f"postgre = {DATABASE_URL}\nmongo = {DATABASE_MONGO_URL}"}
