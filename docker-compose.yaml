@@ -53,6 +53,7 @@ services:
             MONGO_USER: fast_api
             MONGO_PASSWORD: root
             MONGO_DB: fileStorageDB
+            CONTEXT_ENVIRONMENT: docker  # для путей к базам
         ports:
             - "8000:8000"
         volumes:
