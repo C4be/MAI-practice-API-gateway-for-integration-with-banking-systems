@@ -33,6 +33,7 @@ async def lifespan(app: FastAPI):
 
     yield  # Дальше работает приложение
 
+    # TODO: отключить при продашене
     drop_tables()
     # Очищаем БД при завершении работы
     # with engine.begin() as connection:
