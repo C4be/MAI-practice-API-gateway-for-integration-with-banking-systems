@@ -18,9 +18,10 @@ RUN apt-get update && apt-get install -y \
     libffi-dev \
     shared-mime-info \
     && rm -rf /var/lib/apt/lists/*
-    
-# Копируем файл зависимостей (например, requirements.txt)
-COPY . .
+
+# VENV не поддтягиваем
+COPY ./requirements.txt /app/requirements.txt
+COPY ./app /app/app
 
 # Устанавливаем Python-зависимости
 RUN pip install -r requirements.txt

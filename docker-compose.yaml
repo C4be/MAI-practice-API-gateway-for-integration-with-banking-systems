@@ -56,9 +56,9 @@ services:
             CONTEXT_ENVIRONMENT: docker  # для путей к базам
         ports:
             - "8000:8000"
-        volumes:
+        # volumes:
             # - ./.temp_data/.backend:/app # Для разработки, чтобы изменения сразу применялись
-            - ./.temp_data/.pip_cache:/root/.cache/pip  # Volume для кэша pip
+            # - ./.temp_data/.pip_cache:/root/.cache/pip  # Volume для кэша pip
         working_dir: /app
         command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
         networks:
