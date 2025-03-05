@@ -14,8 +14,8 @@ class Contract(Base):
     document_id = Column(Integer, ForeignKey('document.id'))
     
     # ID статуса операции
-    operation_status_id = Column(Integer, ForeignKey('operation.id'))
+    oper_status_id = Column(Integer, ForeignKey('oper_status.id'))
     
     user = relationship("User")
     document = relationship("Document")
-    operation_status = relationship("Operation")
+    oper_status = relationship("OperStatus")

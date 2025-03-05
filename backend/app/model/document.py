@@ -22,6 +22,9 @@ class Document(Base):
     # ID Категория документа
     category_id = Column(Integer, ForeignKey('category.id'))
     
+    # ID статуса документа
+    doc_status_id = Column(Integer, ForeignKey('doc_status.id'))
+    
     # Дата с которой актуальна запись
     actual_date = Column(Date)
     
@@ -36,4 +39,5 @@ class Document(Base):
     
     user = relationship("User", foreign_keys=[user_id])
     worker = relationship("User", foreign_keys=[worker_id])
+    doc_status = relationship('DocStatus')
     category = relationship("Category")

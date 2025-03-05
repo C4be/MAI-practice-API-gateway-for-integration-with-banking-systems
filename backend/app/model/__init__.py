@@ -7,3 +7,5 @@ from .document import *
 from .stat import *
 from .operation import *
 from .contract import *
+from .doc_status import *
+from .oper_status import *
